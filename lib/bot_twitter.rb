@@ -54,30 +54,14 @@ def follow_hello(follow)
 	  end
 end
 
-def login_stream
-	@client_live = Twitter::Streaming::Client.new do |config|
-		config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
-		config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
-		config.access_token        = ENV["TWITTER_ACCESS_TOKEN"]
-		config.access_token_secret = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
-	end
-end
 
-def stream_follow_hello
-	@client_live.filter(track: "#bonjour_monde") do |object|
-  puts object.text if object.is_a?(Twitter::Tweet)
-  puts object.user.screen_name
-	@client.favorite(object)
-	@client.follow(object.user.screen_name)
-end
-end
 
 def perform
 	
 	# hello(login_twitter)
-	# like_hello(login_twitter)
-	# follow_hello(login_twitter)
-	stream_follow_hello(login_stream)
+	#like_hello(login_twitter)
+	follow_hello(login_twitter)
+	
 end
 perform
 
